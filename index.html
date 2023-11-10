@@ -4,12 +4,21 @@
 </head>
 <body>
     <div x-data="{
-        responsedata: null,
+        drivers: [],
         async getData() {
-            this.responsedata = await (await fetch('https://system-service-lucassyroit.cloud.okteto.net/drivers/')).json();
+            this.drivers = await (await fetch('https://system-service-lucassyroit.cloud.okteto.net/drivers/')).json();
         }
-    }">
-        Data returned: <strong x-text="responsedata[0].first_name">Placeholder</strong>
+    }" x-init="getData()">
+        <button @click="getData()">Refresh Data</button>
+        <template x-for="driver in drivers" :key="driver.id">
+            <div>
+                <p x-text="driver.first_name"></p>
+                <p x-text="driver.last_name"></p>
+                <p x-text="driver.country"></p>
+                <p x-text="driver.team"></p>
+                <p x-text="driver.is_active"></p>
+            </div>
+        </template>
     </div>
 </body>
 </html>
