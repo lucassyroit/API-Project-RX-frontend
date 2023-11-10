@@ -5,11 +5,11 @@
 <body>
     <div x-data="{
         drivers: [],
-        async getData() {
-            this.drivers = await (await fetch('https://system-service-lucassyroit.cloud.okteto.net/drivers/')).json();
+        async getDrivers() {
+            this.drivers = await (await fetch('https://system-service-lucassyroit.cloud.okteto.net/drivers')).json();
         }
-    }" x-init="getData()">
-        <button x-on:click="getData">Refresh Data</button>
+    }" x-init="getDrivers()">
+        <button x-on:click="getDrivers">Get All drivers</button>
         <template x-for="driver in drivers" :key="driver.id">
             <div>
                 <p x-text="driver.first_name"></p>
