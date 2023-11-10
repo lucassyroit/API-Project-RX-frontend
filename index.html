@@ -3,10 +3,16 @@
     <script defer src="https://unpkg.com/alpinejs@3.5.0/dist/cdn.min.js"></script>
 </head>
 <body>
+    <h1>API Project | RX</h1>
+    <h2>Get all drivers</h2>
     <div x-data="{
         drivers: [],
+        driver: {},
         async getDrivers() {
             this.drivers = await (await fetch('https://system-service-lucassyroit.cloud.okteto.net/drivers')).json();
+        },
+        async getDriver(driver_id) {
+            this.driver = await (await fetch('https://system-service-lucassyroit.cloud.okteto.net/drivers/' + driver_id)).json();
         }
     }" x-init="getDrivers()">
         <button x-on:click="getDrivers">Get All drivers</button>
@@ -17,8 +23,17 @@
                 <p x-text="driver.country"></p>
                 <p x-text="driver.team"></p>
                 <p x-text="driver.is_active"></p>
+                <button x-on:click="getDriver(driver.id)">Get This Driver</button>
             </div>
         </template>
+        <div x-show="driver.id">
+            <h2>Selected Driver</h2>
+            <p x-text="driver.first_name"></p>
+            <p x-text="driver.last_name"></p>
+            <p x-text="driver.country"></p>
+            <p x-text="driver.team"></p>
+            <p x-text="driver.is_active"></p>
+        </div>
     </div>
 </body>
 </html>
