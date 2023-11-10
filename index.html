@@ -6,7 +6,7 @@
     <div x-data="{
         drivers: [],
         async getDrivers() {
-            this.drivers = await (await fetch('http://127.0.0.1:8000/drivers/')).json();
+            this.drivers = await (await fetch('http://127.0.0.1:8000/drivers')).json();
         }
     }" x-init="getDrivers()">
         <button x-on:click="getDrivers">Get All drivers</button>
