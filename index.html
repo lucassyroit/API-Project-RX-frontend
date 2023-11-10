@@ -9,7 +9,7 @@
             this.drivers = await (await fetch('https://system-service-lucassyroit.cloud.okteto.net/drivers/')).json();
         }
     }" x-init="getData()">
-        <button @click="getData()">Refresh Data</button>
+        <button x-on:click="getData">Refresh Data</button>
         <template x-for="driver in drivers" :key="driver.id">
             <div>
                 <p x-text="driver.first_name"></p>
